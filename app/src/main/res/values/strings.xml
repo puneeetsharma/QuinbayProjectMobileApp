@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">QuinbayProjectMobileApp</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Product Price</string>
+    <string name="product_rating">Product Rating</string>
+    <string name="card_button_text">See details</string>
+
 </resources>
