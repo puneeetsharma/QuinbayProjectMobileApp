@@ -2,6 +2,7 @@ package com.example.quinbayprojectmobileapp.application;
 
 import android.app.Application;
 
+import com.example.quinbayprojectmobileapp.constants.ConstantClass;
 import com.example.quinbayprojectmobileapp.utils.Constants;
 
 import okhttp3.OkHttpClient;
@@ -18,9 +19,16 @@ public class ApplicationClass extends Application {
     public void onCreate()
     {
         super.onCreate();
-        retrofit=new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(Constants.BASE_URL)
-                .client(new OkHttpClient())
-                .build();
+
+    }
+
+    public  Retrofit getRetrofitClient(){
+        if(retrofit==null) {
+            retrofit = new Retrofit.Builder()
+                    .client(new OkHttpClient())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl(ConstantClass.BASE_URL).build();
+        }
+        return retrofit;
     }
 }

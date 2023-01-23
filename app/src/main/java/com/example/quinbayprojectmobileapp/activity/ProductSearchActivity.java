@@ -1,9 +1,4 @@
-package com.example.quinbayprojectmobileapp;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.quinbayprojectmobileapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.quinbayprojectmobileapp.R;
 import com.example.quinbayprojectmobileapp.adapter.ProductAdapter;
 import com.example.quinbayprojectmobileapp.application.ApplicationClass;
 import com.example.quinbayprojectmobileapp.model.Products;
@@ -27,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductSearch extends AppCompatActivity implements ProductAdapter.OnClickInterface {
+public class ProductSearchActivity extends AppCompatActivity implements ProductAdapter.OnClickInterface {
 
     int page=1;
     List<Products> productsItems = new ArrayList<>();
@@ -54,8 +53,8 @@ public class ProductSearch extends AppCompatActivity implements ProductAdapter.O
 
 
         //<---------------Toolbar----------------------------------->
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
 
         //<---------------Toolbar----------------------------------->
@@ -99,11 +98,11 @@ public class ProductSearch extends AppCompatActivity implements ProductAdapter.O
                         //ProductRv.setLayoutManager(new LinearLayoutManager(ProductRv.getContext()));
                         progressBarStart.setVisibility(View.GONE);
                     } else {
-                        Toast.makeText(ProductSearch.this, "Not Found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductSearchActivity.this, "Not Found", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 } else {
-                    Toast.makeText(ProductSearch.this, "Not Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductSearchActivity.this, "Not Found", Toast.LENGTH_SHORT).show();
                     //finish();
                 }
             }
@@ -123,7 +122,7 @@ public class ProductSearch extends AppCompatActivity implements ProductAdapter.O
                     progressBarEnd.setVisibility(View.VISIBLE);
 
                     //Toast.makeText(ProductRecyclerView.this, "Last", Toast.LENGTH_LONG).show();
-                    apiInterface.getProducts(searchValue,20,0).enqueue(new Callback<Products>() {
+                    apiInterface.getProducts("iPhone 14",20,0).enqueue(new Callback<Products>() {
                         @Override
                         public void onResponse(Call<Products> call, Response<Products> response) {
                             if (response.isSuccessful() && response.body() != null) {
@@ -134,11 +133,11 @@ public class ProductSearch extends AppCompatActivity implements ProductAdapter.O
                                 //productAdapterLiner.notifyItemRangeInserted(positionStart, data.getProducts().size());
                                 //productAdapterGrid.notifyItemRangeInserted(positionStart, data.getProducts().size());
                                 //productAdapterStaggered.notifyItemRangeInserted(positionStart, data.getProducts().size());
-                                ProductRv.setAdapter(new ProductAdapter(productsItems, ProductSearch.this));
+                                ProductRv.setAdapter(new ProductAdapter(productsItems, ProductSearchActivity.this));
                                 //ProductRv.setLayoutManager(new LinearLayoutManager(ProductRv.getContext()));
                                 page = page + 1;
                             } else {
-                                Toast.makeText(ProductSearch.this, "Not Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductSearchActivity.this, "Not Found", Toast.LENGTH_SHORT).show();
                                 progressBarEnd.setVisibility(View.GONE);
                             }
                         }
@@ -162,7 +161,7 @@ public class ProductSearch extends AppCompatActivity implements ProductAdapter.O
 
     @Override
     public void onCardClick(Products productsItem,int position) {
-        Intent cardClickIntent = new Intent(ProductSearch.this, ProjectDetails.class);
+        Intent cardClickIntent = new Intent(ProductSearchActivity.this, ProductDetailsActivity.class);
         cardClickIntent.putExtra("productName", productsItem.getProductName());
         cardClickIntent.putExtra("productRating", String.valueOf(productsItem.getProductRating()));
         cardClickIntent.putExtra("productPrice", productsItem.getProductPrice());
@@ -177,7 +176,7 @@ public class ProductSearch extends AppCompatActivity implements ProductAdapter.O
     @Override
     public void onButtonClick(Products productsItem,int position) {
 
-        Intent cardButtonIntent = new Intent(ProductSearch.this, ProjectDetails.class);
+        Intent cardButtonIntent = new Intent(ProductSearchActivity.this, ProductDetailsActivity.class);
         cardButtonIntent.putExtra("productName", productsItem.getProductName());
         cardButtonIntent.putExtra("productRating", String.valueOf(productsItem.getProductRating()));
         cardButtonIntent.putExtra("productPrice", productsItem.getProductPrice());

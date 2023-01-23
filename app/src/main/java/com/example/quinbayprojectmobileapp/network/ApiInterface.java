@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
-    @GET("backend/search/products")
+    @GET("/searchItemsByName")
     Call<Products> getProducts(@Query("searchTerm") String searchTerm,@Query("page") int page,
                                @Query("start") int start);
 }

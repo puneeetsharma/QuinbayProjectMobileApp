@@ -1,6 +1,7 @@
-package com.example.quinbayprojectmobileapp;
+package com.example.quinbayprojectmobileapp.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
@@ -11,10 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.quinbayprojectmobileapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePageActivity extends AppCompatActivity {
 
+
+    ActionBar actionBar;
     ListView listView;
     String[] name = {"apple","samsung","mi","moto","nokia"};
     BottomNavigationView bottomNavigationView;
@@ -33,6 +37,7 @@ public class HomePageActivity extends AppCompatActivity {
         //listView.setAdapter(arrayAdapter);
 
         //<---------------listView ----------------------------------->
+
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
